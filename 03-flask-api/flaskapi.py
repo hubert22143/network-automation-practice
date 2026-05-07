@@ -1,5 +1,6 @@
-from flask import Flask , request , jsonify
+from flask import Flask , request , jsonify , Response
 from classes.books import Library
+from functools import wraps
 app = Flask(__name__)
 
 myLibrary = Library()
@@ -17,6 +18,25 @@ myLibrary.printLibrary()
 
 
 
+VALID_USERNAME = "ADMIN"
+VALID_PASSWORD = "SECRET"
+
+def check_auth(username,password):
+    return username == VALID_USERNAME and password == VALID_PASSWORD
+def authenticate():
+    return Response("Your credentials are incorrect" , 401 , {"WWW-Authenticate": 'Basic realm="Login Required"'})
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args , **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username , auth.password):
+            return authenticate()
+        return f(*args,**kwargs)
+    return decorated
+@app.route('/protected')
+@requires_auth
+def protected():
+    return jsonify({"message" : "You are authenticated!"})
 @app.route('/api/removeBook', methods = ['DELETE'])
 def delete_book():
     data = request.get_json()
@@ -33,8 +53,6 @@ def delete_book():
         return jsonify({
             "error" : "Incorrect JSON provided"
         }), 400
- 
-        
 
 @app.route('/api/books', methods = ['GET'])
 def get_books():
@@ -93,6 +111,12 @@ def api_index():
                 "method" : "DELETE",
                 "path" : "/api/removeBook",
                 "description" : "Remove a book"
+
+            },
+            {
+                "method" : "GET",
+                "path" : "/protected",
+                "description" : "Check your authentication"
 
             }
         ]
