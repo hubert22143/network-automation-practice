@@ -1,0 +1,107 @@
+{
+  "info": {
+    "_postman_id": "b27fc65b-ad41-4fd7-8379-b31e5c28c954",
+    "name": "SWAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54436779",
+    "_collection_link": "https://go.postman.co/collection/54436779-b27fc65b-ad41-4fd7-8379-b31e5c28c954?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GetPeople",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "swapi.info/api/people/1",
+          "host": [
+            "swapi",
+            "info"
+          ],
+          "path": [
+            "api",
+            "people",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetPlanets",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "swapi.info/api/planets",
+          "host": [
+            "swapi",
+            "info"
+          ],
+          "path": [
+            "api",
+            "planets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetEverything",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "swapi.info/api/",
+          "host": [
+            "swapi",
+            "info"
+          ],
+          "path": [
+            "api",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "swapi.info/api/starships/3",
+          "host": [
+            "swapi",
+            "info"
+          ],
+          "path": [
+            "api",
+            "starships",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
