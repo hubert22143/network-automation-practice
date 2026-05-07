@@ -3,6 +3,10 @@ class Library:
         self.libraryContainer = {}
         self.next_id = 1
     def add_book(self,book_type,name,author,pages,year):
+        pages = int(pages)
+        year = int(year)
+
+
         if author not in self.libraryContainer:
           self.libraryContainer[author] = []
         self.libraryContainer[author].append({
@@ -43,9 +47,9 @@ class Library:
         if name != "":
             editingBook["name"] = name
         if pages != 0:
-            editingBook["pages"] = pages
+            editingBook["pages"] = int(pages)
         if year != 0:
-            editingBook["year"] = year
+            editingBook["year"] = int(year)
         
         if author != "" and author != book_author_to_edit:
             books.remove(editingBook)
@@ -54,6 +58,23 @@ class Library:
                 self.libraryContainer[author] = []
             self.libraryContainer[author].append(editingBook)
         print("The book was successufuly edited")
+    def printLibrary(self):
+        print(f"This is available list of authors and their books: {self.libraryContainer}")
+    def isBookExistingInEntries(self,author,book_id) -> dict:
+        request_entry = {
+        "was_correct_author_provided": False,
+        "was_correct_book_id_Provided": False
+        }
+
+        for eachAuthor in self.libraryContainer:
+            if eachAuthor == author:
+                request_entry["was_correct_author_provided"] = True
+                for eachBookId in self.libraryContainer[eachAuthor]:
+                    if eachBookId["book_id"] == book_id:
+                        request_entry["was_correct_book_id_Provided"] = True
+                break
+        return request_entry
+
 
         
 
